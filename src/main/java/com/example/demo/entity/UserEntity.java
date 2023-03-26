@@ -1,28 +1,27 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 @Entity
 @Table(name = "USER")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DOCUMENT")
-    private Integer UserID;
+    private Integer document;
 
     @Column(name = "NAME")
-    private String userName;
+    private String name;
 
     @Column(name = "LAST_NAME")
-    private String userLastName;
+    private String last_name;
 
     @Column(name = "DATE_CREATED")
-    private String creationDate;
+    private String date_created;
 }

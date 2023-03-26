@@ -13,7 +13,7 @@ public class AccountController {
     @PostMapping(path = "/account")
     public String createAccount(@RequestBody AccountDTO accountDTO) {
         service.insertAccount(accountDTO);
-        return "Account created";
+        return "Cuenta creada con exito";
     }
 
     @GetMapping(path = "/account/check-balance/{accountNumber}")
@@ -21,10 +21,6 @@ public class AccountController {
         return service.getAccountFundsByAccountNumber(accountNumber);
     }
 
-    @GetMapping(path = "/user/check-accounts/{userID}")
-    public String checkAccounts(@PathVariable("userID") int userID) {
-        return service.checkAccounts(userID);
-    }
     @PutMapping (path = "/account/deposit-money")
     public String depositMoney(@RequestBody DepositMoneyUserDto depositMoneyUserDTO) {
         service.depositMoney(depositMoneyUserDTO);

@@ -1,44 +1,41 @@
 package com.example.demo.service;
 
-import com.example.demo.controller.dto.AccountDTO;
-import com.example.demo.controller.dto.DepositMoneyUserDto;
-import com.example.demo.entity.AccountEntity;
-import com.example.demo.repository.AccountRepository;
-import org.springframework.data.domain.ExampleMatcher;
+import com.example.demo.controller.dto.*;
+import com.example.demo.entity.*;
+import com.example.demo.repository.*;
+import lombok.*;
+import org.springframework.stereotype.Service;
 
+
+
+@Service
+@AllArgsConstructor
 public class AccountService {
-    AccountRepository accountRepository;
+    AccountRepository accountRepo;
+    UserRepository userRepo;
 
     public String insertAccount(AccountDTO accountDTO){
-        AccountEntity account = new AccountEntity();
-        account.setCreationDate(accountDTO.getCreationDate());
-        ExampleMatcher matcher = ExampleMatcher.matchingAny();
-        System.out.println(bookingRepository.count(Example.of(probe, matcher)));
-        if (bookingRepository.count(Example.of(probe, matcher)) < 20) {
-            probe.setClient_id(bookingDTO.getClient_id());
-            matcher = ExampleMatcher.matchingAll().withIgnorePaths("id", "pet_id");
-            if(bookingRepository.count(Example.of(probe, matcher)) < 1) {
-                bookingRepository.save(new Booking(bookingDTO.getId(), bookingDTO.getClient_id(), bookingDTO.getPet_id(), bookingDTO.getDate()));
-                return "booking added";
-            } else {
-                return "you already have a booking for another pet";
-            }
-        } else {
-            return "booking cannot be added";
+        if(userRepo.existsById(accountDTO.getUser()) && accountRepo.getAllAccounts(accountDto.getUser()).size()<=4){
+            accountRepository.save(new AccountEntity(accountDto.getId(),accountDto.getType(),accountDto.getMoney(),accountDto.getDate_created(),accountDto.getUser()));
+            return "La cuenta fue creada con exito";
+        }
+        else{
+            return "Se excede el límite de cuentas";
         }
     }
-    public int getAccountFundsByAccountNumber(){
-
-        return 0;
+    public int getAccountFundsByAccountNumber(AccountDto accountDTO){
+        AccountEntity account = accountRepo.findById(accountDTO.getAccountNumber());
+        UserEntity user = userRepo.findById(account.getUser());
+        return account.getMoney();
     }
     public String depositMoney(DepositMoneyUserDto depositMoneyUserDto) {
         try {
-            accountRepository.depositMoney(depositMoneyUserDto.getMoneyAmount(), depositMoneyUserDto.getAccountNumber());
-            return "Your account has been recharged ";
+            accountRepo.depositMoney(depositMoneyUserDto.getMoneyAmount(), depositMoneyUserDto.getAccountNumber());
+            return "La cuenta ha sido recargada ";
         }
         catch (Exception e) {
             System.out.println(e);
-            return "Your account has NOT been recharged";
+            return "No se ha podido depositar a la cuenta";
         }
     }
 }
