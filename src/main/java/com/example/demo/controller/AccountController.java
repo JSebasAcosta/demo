@@ -13,8 +13,7 @@ public class AccountController {
 
     @PostMapping(path = "/account")
     public String createAccount(@RequestBody AccountDTO accountDTO) {
-        service.insertAccount(accountDTO);
-        return "Cuenta creada con exito";
+        return service.insertAccount(accountDTO);
     }
 
     @GetMapping(path = "/account/check-balance/{accountNumber}")

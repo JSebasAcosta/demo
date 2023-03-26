@@ -21,11 +21,12 @@ public class AccountEntity {
     @Column(name = "TYPE", nullable = false)
     private String type;
 
+    @Column(name = "MONEY", nullable = false)
+    private int money=0;
     @Column(name = "DATE_CREATED", nullable = false)
     private String date_created;
 
-    @Column(name = "MONEY", nullable = false)
-    private int money=0;
+
 
     //Llave foránea
     //@ManyToOne
