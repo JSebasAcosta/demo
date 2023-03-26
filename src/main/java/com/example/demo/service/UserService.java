@@ -15,8 +15,10 @@ public class UserService {
     private UserRepository userRepo;
     private AccountRepository accountRepo;
 
-    public UserEntity createUser(UserEntity userEntity){
-        return userRepo.save(userEntity);
+    public String createUser(UserDTO userDTO){
+        userRepo.save(new UserEntity(userDTO.getDocument(), userDTO.getName(), userDTO.getLast_name(), userDTO.getDate_created()));
+
+        return "El usuario fue creao con exito.";
     }
 
     public String getAllUserAccounts(int document){   

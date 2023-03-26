@@ -1,5 +1,6 @@
 package com.example.demo.controller.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 

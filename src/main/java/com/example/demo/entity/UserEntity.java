@@ -8,20 +8,19 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 
 public class UserEntity {
     @Id
+    @Column(name = "DOCUMENT",nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "DOCUMENT")
     private int document;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "LAST_NAME")
+    @Column(name = "LAST_NAME", nullable = false)
     private String last_name;
 
-    @Column(name = "DATE_CREATED")
+    @Column(name = "DATE_CREATED", nullable = false)
     private String date_created;
 }
