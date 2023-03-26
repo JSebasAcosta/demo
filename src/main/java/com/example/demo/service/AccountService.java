@@ -15,17 +15,17 @@ public class AccountService {
     UserRepository userRepo;
 
     public String insertAccount(AccountDTO accountDTO){
-        if(userRepo.existsById(accountDTO.getUser()) && accountRepo.getAllAccounts(accountDto.getUser()).size()<=4){
-            accountRepository.save(new AccountEntity(accountDto.getId(),accountDto.getType(),accountDto.getMoney(),accountDto.getDate_created(),accountDto.getUser()));
+        if(this.userRepo.existsById(accountDTO.getUser()) && accountRepo.getAllAccounts(accountDTO.getUser()).size()<4){
+            accountRepo.save(new AccountEntity(accountDTO.getId(),accountDTO.getType(),String.valueOf(accountDTO.getMoney()),Integer.parseInt(accountDTO.getDate_created()),accountDTO.getUser()));
             return "La cuenta fue creada con exito";
         }
         else{
             return "Se excede el límite de cuentas";
         }
     }
-    public int getAccountFundsByAccountNumber(AccountDto accountDTO){
-        AccountEntity account = accountRepo.findById(accountDTO.getAccountNumber());
-        UserEntity user = userRepo.findById(account.getUser());
+    public int getAccountFundsByAccountNumber(int accountNumber){
+        AccountEntity account = accountRepo.findById(accountNumber).orElse(new AccountEntity());
+        UserEntity user = userRepo.findById(account.getUser()).orElse(new UserEntity());
         return account.getMoney();
     }
     public String depositMoney(DepositMoneyUserDto depositMoneyUserDto) {

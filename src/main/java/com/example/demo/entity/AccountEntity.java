@@ -16,16 +16,16 @@ public class AccountEntity {
     @Id
     @Column(name = "ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int accountNumber;
+    private int id;
 
     @Column(name = "TYPE", nullable = false)
-    private String accountType;
+    private String type;
 
     @Column(name = "DATE_CREATED", nullable = false)
-    private String creationDate;
+    private String date_created;
 
     @Column(name = "MONEY", nullable = false)
-    private int accountFunds=0;
+    private int money=0;
 
     //Llave foránea
     @ManyToOne

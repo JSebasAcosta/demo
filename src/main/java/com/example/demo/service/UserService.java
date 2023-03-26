@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.controller.dto.T*;
+import com.example.demo.controller.dto.*;
 import com.example.demo.entity.UserEntity;
 import com.example.demo.repository.TransactionRepository;
 import com.example.demo.repository.*;
@@ -21,7 +21,7 @@ public class UserService {
 
     public String getAllUserAccounts(int document){   
         try {
-        UserEntity user = userRepo.findById(document);
+        UserEntity user = userRepo.findById(document).orElse(new UserEntity());
         return "Cuentas de usuario: "+accountRepo.getAllAccounts(document);
         }
         catch (Exception e){

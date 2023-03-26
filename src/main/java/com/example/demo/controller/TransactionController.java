@@ -15,8 +15,7 @@ public class TransactionController {
 
     @PutMapping(path = "/account/transfer-money")
     public String transferMoney(@RequestBody TransactionDTO transferData) {
-        transactionService.insertTransaction(transferData);
-        return "La transferencia fue exitosa";
+        return transactionService.transferMoney(transferData);
     }
 
 }

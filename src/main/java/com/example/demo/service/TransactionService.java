@@ -16,9 +16,9 @@ public class TransactionService {
     public void saveTransaction(TransactionDTO transactionDTO){
         transactionRepository.save(new TransactionEntity(transactionDTO.getId(), transactionDTO.getOrigen(), transactionDTO.getDestination(), transactionDTO.getAmount()));
     }
-    public String{
+    public String transferMoney(TransactionDTO transactionDTO){
         if (this.accountRepository.existsById(transactionDTO.getDestination())&&this.accountRepository.existsById(transactionDTO.getOrigen())){
-            AccountEntity senderAccount = accountRepository.findById(transactionDTO.getOrigen());
+            AccountEntity senderAccount = accountRepository.findById(transactionDTO.getOrigen()).orElse(new AccountEntity());
             if (senderAccount.getMoney()>=transactionDTO.getAmount()){
                 accountRepository.depositMoney(transactionDTO.getAmount(),transactionDTO.getDestination());
                 accountRepository.depositMoney(-1*transactionDTO.getAmount(),transactionDTO.getOrigen());
