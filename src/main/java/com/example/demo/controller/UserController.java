@@ -18,8 +18,5 @@ public class UserController {
         userService.createUser(userEntity);
         return "Se ha creado el usuario con exito.";
     }
-    @GetMapping(path = "/account/check-accounts/{document}")
-    public String getAllAccounts(@PathVariable int document){
-        return userService.getAllUserAccounts(document);
-    }
+
 }

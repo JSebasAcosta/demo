@@ -14,7 +14,7 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DOCUMENT")
-    private Integer document;
+    private int document;
 
     @Column(name = "NAME")
     private String name;

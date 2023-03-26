@@ -4,6 +4,7 @@ import com.example.demo.entity.AccountEntity;
 import com.example.demo.service.AccountService;
 import lombok.*;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -25,5 +26,10 @@ public class AccountController {
     public String depositMoney(@RequestBody DepositMoneyUserDto depositMoneyUserDTO) {
         service.depositMoney(depositMoneyUserDTO);
         return "Se ha realizado el deposito exitosamente";
+    }
+
+    @GetMapping("/accounts")
+    public List<AccountEntity> getUserAccounts(@RequestParam("documento") Integer documento){
+        return service.getUserAccounts(documento);
     }
 }

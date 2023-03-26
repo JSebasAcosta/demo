@@ -9,5 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity,Integer>  {
+    UserEntity getUserByDocument(int document);
 
 }

@@ -21,7 +21,7 @@ public class UserService {
 
     public String getAllUserAccounts(int document){   
         try {
-        UserEntity user = userRepo.findById(document).orElse(new UserEntity());
+        UserEntity userEntity = userRepo.findById(document).orElse(new UserEntity());
         return "Cuentas de usuario: "+accountRepo.getAllAccounts(document);
         }
         catch (Exception e){

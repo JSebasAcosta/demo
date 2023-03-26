@@ -6,6 +6,7 @@ import com.example.demo.repository.*;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 
 @Service
@@ -25,7 +26,6 @@ public class AccountService {
     }
     public int getAccountFundsByAccountNumber(int accountNumber){
         AccountEntity account = accountRepo.findById(accountNumber).orElse(new AccountEntity());
-        UserEntity user = userRepo.findById(account.getUser()).orElse(new UserEntity());
         return account.getMoney();
     }
     public String depositMoney(DepositMoneyUserDto depositMoneyUserDto) {
@@ -38,4 +38,9 @@ public class AccountService {
             return "No se ha podido depositar a la cuenta";
         }
     }
+    public List<AccountEntity> getUserAccounts(Integer document) {
+        UserEntity user = userRepo.getUserByDocument(document);
+        return accountRepo.getAllAccounts(user.getDocument());
+    }
 }
+

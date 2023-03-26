@@ -28,8 +28,8 @@ public class AccountEntity {
     private int money=0;
 
     //Llave foránea
-    @ManyToOne
-    @JoinColumn(name = "USER")
+    //@ManyToOne
+    @Column(name = "USER")
     private int user;
 
 
